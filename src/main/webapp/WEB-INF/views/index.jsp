@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
@@ -27,6 +28,8 @@
             <tr>
                 <th scope="col">Тема</th>
                 <th scope="col">Редактировать пост:</th>
+                <th scope="col">Описание:</th>
+                <th scope="col"> Дата:</th>
 
             </tr>
             </thead>
@@ -35,7 +38,8 @@
                 <tr>
                     <td><c:out value="${post.name}"/></td>
                     <td> <a href="<c:url value='/edit?id=${post.id}'/>">Редактировать пост</a></td>
-
+                    <td><c:out value="${post.description}"/></td>
+                    <td><fmt:formatDate type = "BOTH" dateStyle="MEDIUM" value = "${post.created}" /></td>
                 </tr>
             </c:forEach>
             </tbody>

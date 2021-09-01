@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <td>Описание:</td>
-            <td><input type='text' name='desc'></td>
+            <td><input type='text' name='description'></td>
         </tr>
 
             <td colspan='2'><input name="submit" type="submit" value="Сохранить" /></td>
