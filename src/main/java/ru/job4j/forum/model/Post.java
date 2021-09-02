@@ -19,6 +19,13 @@ public class Post {
     public static Post of(String name, String description) {
         Post post = new Post();
         post.name = name;
+        post.description = description;
+        return post;
+    }
+
+    public static Post of(String name) {
+        Post post = new Post();
+        post.name = name;
         return post;
     }
 

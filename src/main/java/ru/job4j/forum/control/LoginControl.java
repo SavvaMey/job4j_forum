@@ -14,15 +14,15 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginControl {
     @GetMapping("/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error,
-                            @RequestParam(value = "logout", required = false) String logout,
+//                            @RequestParam(value = "logout", required = false) String logout,
                             Model model) {
         String errorMessage = null;
         if (error != null) {
             errorMessage = "Username or Password is incorrect !!";
         }
-        if (logout != null) {
-            errorMessage = "You have been successfully logged out !!";
-        }
+//        if (logout != null) {
+//            errorMessage = "You have been successfully logged out !!";
+//        }
         model.addAttribute("errorMessage", errorMessage);
         return "login";
     }
