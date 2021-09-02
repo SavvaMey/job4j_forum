@@ -15,6 +15,10 @@
     <title>Форум job4j</title>
 </head>
 <body>
+<div class="ui-icon-stop">
+    <a href="<c:url value='/logout'/>"><c:out value="${user.username}"/> | Выйти</a>
+</div>
+
 <div class="container mt-3">
     <div class="row">
         <h4>Форум job4j</h4>
