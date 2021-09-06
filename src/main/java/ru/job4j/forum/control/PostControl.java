@@ -52,7 +52,6 @@ public class PostControl {
     @GetMapping("/post")
     public String post(@RequestParam("id") int id, Model model) {
         List<Comment> comments = commentService.getComments(id);
-        System.out.println( posts.findPostById(id));
         model.addAttribute("post", posts.findPostById(id));
         model.addAttribute("comments", comments);
         model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());

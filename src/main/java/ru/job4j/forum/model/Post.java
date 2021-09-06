@@ -111,15 +111,5 @@ public class Post {
         return Objects.hash(id, name, description, created);
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", created=" + created +
-                ", commentList=" + commentList +
-                ", user=" + user +
-                '}';
-    }
+
 }
