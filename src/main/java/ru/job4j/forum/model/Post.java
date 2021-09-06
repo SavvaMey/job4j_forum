@@ -1,7 +1,11 @@
 package ru.job4j.forum.model;
 
+import com.zaxxer.hikari.metrics.dropwizard.CodahaleMetricsTrackerFactory;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -13,8 +17,18 @@ public class Post {
     private int id;
     private String name;
     private String description;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
+
+    @OneToMany(mappedBy = "post", orphanRemoval = true,
+            cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public static Post of(String name, String description) {
         Post post = new Post();
@@ -27,6 +41,27 @@ public class Post {
         Post post = new Post();
         post.name = name;
         return post;
+    }
+
+    public List<Comment> getCommentList() {
+        return commentList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void addComment(Comment comment) {
+        commentList.add(comment);
+    }
+
+
+    public void setComments(List<Comment> comments) {
+        this.commentList = comments;
     }
 
     public int getId() {
@@ -68,14 +103,23 @@ public class Post {
             return false;
         }
         Post post = (Post) o;
-        return id == post.id &&
-                Objects.equals(name, post.name) &&
-                Objects.equals(description, post.description) &&
-                Objects.equals(created, post.created);
+        return id == post.id ;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, created);
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", created=" + created +
+                ", commentList=" + commentList +
+                ", user=" + user +
+                '}';
     }
 }

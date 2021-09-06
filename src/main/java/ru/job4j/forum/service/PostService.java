@@ -25,7 +25,6 @@ public class PostService  {
     }
 
     public void createOrUpdatePost(Post post) {
-        System.out.println(post.getDescription());
         post.setCreated(new Date(System.currentTimeMillis()));
         posts.save(post);
     }

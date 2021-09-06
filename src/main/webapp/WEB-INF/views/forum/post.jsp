@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,7 +15,6 @@
     <title>Форум job4j</title>
 </head>
 <body>
-
 
 <div class="container mt-3">
     <div class="container">
@@ -33,31 +32,48 @@
             </ul>
         </div>
     </div>
-    <div class="row"  >
+    <div>
+        <h4>Author:</h4>
+        <p> <c:out value="${post.user.username}"/></p> <br>
+        <h4> Post name: </h4>
+        <p> <c:out value="${post.name}"/></p>  <br>
+        <h4> Post Created:</h4>
+        <p><fmt:formatDate type = "BOTH" dateStyle="MEDIUM" value = "${post.created}" /></p>  <br>
+        <h4>Post description:</h4>
+        <p> <c:out value="${post.description}"/></p>
+    </div>
+    <div class="row">
+        <h3> Комментарии</h3>
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">Тема</th>
                 <th scope="col">Автор:</th>
                 <th scope="col"> Дата:</th>
-                <th scope="col">Редактировать пост:</th>
+                <th scope="col">Комментарий</th>
 
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${posts}" var="post">
+            <c:forEach items="${comments}" var="comment">
                 <tr>
-                    <td><a href="<c:url value='/post?id=${post.id}'/>"><c:out value="${post.name}"/></a></td>
-
-                    <td><c:out value="${post.user.username}"/></td>
-                    <td><fmt:formatDate type = "BOTH" dateStyle="MEDIUM" value = "${post.created}" /></td>
-                    <c:if test="${post.user.username==user.username}">
-                        <td> <a href="<c:url value='/edit?id=${post.id}'/>">Редактировать пост</a></td>
-                    </c:if>
+                    <td><c:out value="${comment.author}"/></td>
+                    <td><fmt:formatDate type = "BOTH" dateStyle="MEDIUM" value = "${comment.created}" /></td>
+                    <td><c:out value="${comment.message}"/></td>
                 </tr>
             </c:forEach>
             </tbody>
         </table>
+    </div>
+
+    <div class="raw">
+        <form action="<c:url value='/postComment?idPost=${post.id}'/>" method="post">
+            <label  class="form-label" >Оставьте ваш комментарий:</label>
+            <input class="form-control" type="text" value="<c:out value="${user.username}"/>" name="author" readonly>
+            <div class="mb-3">
+                <textarea class="form-control" id="message" name="message" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
     </div>
 </div>
 
