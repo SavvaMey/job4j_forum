@@ -10,6 +10,4 @@ public interface PostStore {
     Post findPostById(int id);
 
     void createOrUpdatePost(Post post);
-
-
 }

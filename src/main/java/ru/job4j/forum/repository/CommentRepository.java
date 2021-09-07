@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface CommentRepository  extends CrudRepository<Comment, Integer> {
-    public List<Comment> findByPostId(int id);
+    List<Comment> findByPostId(int id);
 }

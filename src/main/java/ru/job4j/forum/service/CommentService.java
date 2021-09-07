@@ -21,17 +21,17 @@ public class CommentService {
         this.posts = posts;
     }
 
-    public List<Comment> getComments(int id ) {
+    public List<Comment> getComments(int id) {
         return commentRepository.findByPostId(id);
     }
 
 
-    public void postComment (Comment comment, int idPost) {
+    public void postComment(Comment comment, int idPost) {
         Optional<Post> post = posts.findById(idPost);
         comment.setCreated(new Date(System.currentTimeMillis()));
         if (post.isPresent()) {
             comment.setPost(post.get());
             commentRepository.save(comment);
         }
-     }
+    }
 }

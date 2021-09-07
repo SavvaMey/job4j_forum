@@ -1,7 +1,5 @@
 package ru.job4j.forum.model;
 
-import com.zaxxer.hikari.metrics.dropwizard.CodahaleMetricsTrackerFactory;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,8 +21,7 @@ public class Post {
 
     @OneToMany(mappedBy = "post", orphanRemoval = true,
             cascade = CascadeType.ALL)
-    private List<Comment> commentList = new ArrayList<>();;
-
+    private List<Comment> commentList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -103,7 +100,7 @@ public class Post {
             return false;
         }
         Post post = (Post) o;
-        return id == post.id ;
+        return id == post.id;
     }
 
     @Override

@@ -13,8 +13,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.job4j.forum.Main;
 
-import static org.junit.Assert.*;
-
 
 @SpringBootTest(classes = Main.class)
 @AutoConfigureMockMvc
