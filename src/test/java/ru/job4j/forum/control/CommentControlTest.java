@@ -37,18 +37,18 @@ public class CommentControlTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @Test
-    @WithMockUser
-    public void CommentServiceMethodPost() throws Exception {
-        Post post = Post.of("Куплю ладу-грант. Дорого.", "бюджет 100к");
-        post.setId(1);
-        Mockito.when(posts.findPostById(Mockito.anyInt())).thenReturn(Optional.of(post).get());
-        this.mockMvc.perform(post("/postComment?idPost=1")
-                .param("message","koment"))
-                .andDo(print())
-                .andExpect(status().is3xxRedirection());
-        ArgumentCaptor<Comment> argument = ArgumentCaptor.forClass(Comment.class);
-        verify(commentService).postComment(argument.capture(), 1);
-        assertThat(argument.getValue().getMessage(), is("koment"));
-    }
+//    @Test
+//    @WithMockUser
+//    public void CommentServiceMethodPost() throws Exception {
+//        Post post = Post.of("Куплю ладу-грант. Дорого.", "бюджет 100к");
+//        post.setId(1);
+//        Mockito.when(posts.findPostById(Mockito.anyInt())).thenReturn(Optional.of(post).get());
+//        this.mockMvc.perform(post("/postComment?idPost=1")
+//                .param("message","koment"))
+//                .andDo(print())
+//                .andExpect(status().is3xxRedirection());
+//        ArgumentCaptor<Comment> argument = ArgumentCaptor.forClass(Comment.class);
+//        verify(commentService).postComment(argument.capture(), 1);
+//        assertThat(argument.getValue().getMessage(), is("koment"));
+//    }
 }
