@@ -1,20 +1,19 @@
 language: java
-
 jdk:
   - openjdk14
-
 sudo: false
-
 env:
   global:
     - CODECOV_TOKEN="e5ddc29f-4763-4695-83df-0399cce486fc"
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
 notifications:
   email:
-    recipients:
-      -savva28031997@gmail.com
-    on_success: never # default: change
-    on_failure: always # default: always
-
+    recipients: "-savva28031997@gmail.com"
+    on_success: never
+    on_failure: always
+deploy:
+  provider: heroku
+  api_key:
+    secure: Nv9g6qfEiEzquSCdEnB9A1ruc32S0pZzEfebOIjablqkLDsi5sVlEyqdaf0Q2RROesaIe6G5UAZMlGy3ScC3rE8d0IOUzdk8In4o/4txyplp++pcBw5gdug3TYfMABD7BYK9zLxzia/l8Og4vpAIUh+wRjGMW4Sm22DZkXceb1+qFSgw32bUfHmtOSwIu/0lPi4licmRhRHzzqsGn9+0hSAgEIs5/2gIby5iXagWcsMu3gj0zZhWqyLYEBcRs6ghXajuaoqumzilvHck78yrSdK7O6EtY2ieExmATxmBghJQmzV8uVhywiIg6KouPaPzYW2JoJdME5azB0JID8YBWoaPwbDSzb4hkZAUGF7lET8GzM6Hi+OJGf0ai/sAimbFO/y3ChefDTuTBBM+UO2PsxdZcTboc/3VJZOcnvcjC1eAZB9a2TfVL2axeWaDreUKKivCJFXOd0W4e24/6hOgHWn+jqoFl0qiQfsJx1ax95CIdLFVvZZYuPNgLBIJ14ay7baZtMq3suelCd3/JjPJxWnBZyJsvPByeBYZCFoJQ7SbmjmE/uTj/IopIC5wCuuqYpZIW8uceQcpCPiBIyn9GzUsgTMxWHbqJtQRmuSuKwY473OCP1CnvuM1O+TnlqgpdVUiAcWIDsT0jdCrri3xFRaXGxkU0DlN7P+E2+9+s3E=
+  app: fierce-fjord-76880
