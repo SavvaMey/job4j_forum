@@ -8,7 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import ru.job4j.forum.Main;
+import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.model.Post;
 import ru.job4j.forum.service.PostService;
 
@@ -65,7 +68,7 @@ public class PostControlTest {
 
     @Test
     @WithMockUser
-    public void MethodSaveForPost() throws Exception {
+    public void methodSaveForPost() throws Exception {
         this.mockMvc.perform(post("/save")
                 .param("name","Куплю ладу-грант. Дорого."))
                 .andDo(print())
@@ -74,4 +77,5 @@ public class PostControlTest {
         verify(posts).createOrUpdatePost(argument.capture());
         assertThat(argument.getValue().getName(), is("Куплю ладу-грант. Дорого."));
     }
+
 }

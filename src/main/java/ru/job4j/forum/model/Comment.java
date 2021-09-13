@@ -16,7 +16,6 @@ public class Comment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
@@ -55,6 +54,10 @@ public class Comment {
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public Post getPost() {
+        return post;
     }
 
 

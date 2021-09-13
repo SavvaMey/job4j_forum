@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import ru.job4j.forum.Main;
 import ru.job4j.forum.model.Comment;
 import ru.job4j.forum.model.Post;
@@ -19,7 +21,9 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -37,18 +41,20 @@ public class CommentControlTest {
     @Autowired
     private MockMvc mockMvc;
 
-//    @Test
-//    @WithMockUser
-//    public void CommentServiceMethodPost() throws Exception {
-//        Post post = Post.of("Куплю ладу-грант. Дорого.", "бюджет 100к");
-//        post.setId(1);
-//        Mockito.when(posts.findPostById(Mockito.anyInt())).thenReturn(Optional.of(post).get());
-//        this.mockMvc.perform(post("/postComment?idPost=1")
-//                .param("message","koment"))
-//                .andDo(print())
-//                .andExpect(status().is3xxRedirection());
-//        ArgumentCaptor<Comment> argument = ArgumentCaptor.forClass(Comment.class);
-//        verify(commentService).postComment(argument.capture(), 1);
-//        assertThat(argument.getValue().getMessage(), is("koment"));
-//    }
+    @Test
+    @WithMockUser
+    public void commentServiceMethodPost() throws Exception {
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.add("id", "1");
+        map.add("message", "nice car");
+        this.mockMvc.perform(post("/postComment?idPost=2")
+                .params(map))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection());
+        ArgumentCaptor<Comment> argument = ArgumentCaptor.forClass(Comment.class);
+        verify(commentService).postComment(argument.capture(), anyInt());
+        Comment comment = argument.getValue();
+        assertThat(comment.getMessage(), is("nice car"));
+        assertThat(comment.getId(), is(1));
+    }
 }
