@@ -1,11 +1,12 @@
 language: java
 jdk:
   - openjdk14
+
 services:
   - postgresql
 before_install:
   - psql -c 'create database forum_db;' -U postgres
-sudo: false
+
 env:
   global:
     - CODECOV_TOKEN="e5ddc29f-4763-4695-83df-0399cce486fc"
