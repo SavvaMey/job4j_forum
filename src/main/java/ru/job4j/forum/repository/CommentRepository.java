@@ -5,7 +5,6 @@ import ru.job4j.forum.model.Comment;
 
 import java.util.List;
 
-
 public interface CommentRepository  extends CrudRepository<Comment, Integer> {
     List<Comment> findByPostId(int id);
 }

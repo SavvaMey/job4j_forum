@@ -25,7 +25,6 @@ public class CommentService {
         return commentRepository.findByPostId(id);
     }
 
-
     public void postComment(Comment comment, int idPost) {
         Optional<Post> post = posts.findById(idPost);
         comment.setCreated(new Date(System.currentTimeMillis()));
